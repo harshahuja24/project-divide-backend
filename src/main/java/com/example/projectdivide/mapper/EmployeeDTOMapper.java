@@ -6,16 +6,18 @@ import com.example.projectdivide.Entity.Sprint;
 import com.example.projectdivide.Repository.EmployeeRepository;
 import com.example.projectdivide.Repository.SprintRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+@Component
 public class EmployeeDTOMapper {
 
 
     @Autowired
     SprintRepository sprintRepository;
 
-    EmployeeDTO toDTO(Employee employee){
+    public EmployeeDTO toDTO(Employee employee){
 
         EmployeeDTO employeeDTO = new EmployeeDTO();
         employeeDTO.setEid(employee.getEid());
@@ -25,7 +27,7 @@ public class EmployeeDTOMapper {
     }
 
 
-    Employee toEntity(EmployeeDTO employeeDTO){
+     public Employee toEntity(EmployeeDTO employeeDTO){
 
         Employee employee = new Employee();
 

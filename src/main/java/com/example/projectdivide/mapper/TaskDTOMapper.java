@@ -7,9 +7,12 @@ import com.example.projectdivide.Entity.Task;
 import com.example.projectdivide.Repository.EmployeeRepository;
 import com.example.projectdivide.Repository.SprintRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+
+@Component
 public class TaskDTOMapper {
     @Autowired
     EmployeeRepository employeeRepository;

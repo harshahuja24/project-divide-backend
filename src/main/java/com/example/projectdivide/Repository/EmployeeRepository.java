@@ -1,7 +1,7 @@
 package com.example.projectdivide.Repository;
 
+import com.example.projectdivide.DTO.EmployeeDTO;
 import com.example.projectdivide.Entity.Employee;
-import com.example.projectdivide.Entity.Sprint;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -18,4 +18,5 @@ public class SprintDTO {
     private String sprintDesc;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+
 }

@@ -20,13 +20,10 @@ public class EmployeeController {
 
     // Create new employee
     @PostMapping("/createEmployee")
-    public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
-        try {
-            EmployeeDTO createdEmployee = employeeService.createEmployee(employeeDTO);
-            return new ResponseEntity<>(createdEmployee, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
+    public void createEmployee(@RequestBody EmployeeDTO employeeDTO) {
+
+            employeeService.createEmployee(employeeDTO);
+
     }
 
     // Get all employees
@@ -42,7 +39,7 @@ public class EmployeeController {
 
     // Get employee by ID
     @GetMapping("/{id}")
-    public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable Long id) {
+    public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable int id) {
         try {
             EmployeeDTO employee = employeeService.getEmployeeById(id);
             if (employee != null) {
@@ -55,20 +52,7 @@ public class EmployeeController {
         }
     }
 
-    // Delete employee by ID
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteEmployee(@PathVariable Long id) {
-        try {
-            boolean isDeactivated = employeeService.deactivateEmployee(id);
-            if (isDeactivated) {
-                return new ResponseEntity<>("Employee deactivated successfully", HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>("Employee not found", HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error deactivating employee", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+
 
 
 }
