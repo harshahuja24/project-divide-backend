@@ -1,10 +1,8 @@
 package com.example.projectdivide.Entity;
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,13 +16,17 @@ public class Sprint {
 
     private String sprintTitle;
     private String sprintDesc;
+
     @CreationTimestamp
     private LocalDateTime startDate;
+
     @CreationTimestamp
     private LocalDateTime endDate;
 
-    @OneToOne(mappedBy = "sprint")
-    private Employee employee;
+    // FIXED: Changed from @OneToOne to @OneToMany
+    // One sprint can have many employees
+    @OneToMany(mappedBy = "sprint", cascade = CascadeType.ALL)
+    private List<Employee> employees;
 
     @OneToMany(mappedBy = "sprint")
     private List<Task> taskList;

@@ -66,17 +66,17 @@ public class TaskController {
 //        }
 //    }
 //
-//    // Get tasks by sprint ID
-//    @GetMapping("/sprint/{sprintId}")
-//    public ResponseEntity<List<TaskDTO>> getTasksBySprint(@PathVariable int sprintId) {
-//        try {
-//            List<TaskDTO> tasks = taskService.getTasksBySprint(sprintId);
-//            return ResponseEntity.ok(tasks);
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .body(null);
-//        }
-//    }
+    // Get tasks by sprint ID
+    @GetMapping("/bySprintId/{sprintId}")
+    public ResponseEntity<List<TaskDTO>> getTasksBySprint(@PathVariable int sprintId) {
+        try {
+            List<TaskDTO> tasks = taskService.getTasksBySprint(sprintId);
+            return ResponseEntity.ok(tasks);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
 
     // Update task
     @PutMapping("/update")
