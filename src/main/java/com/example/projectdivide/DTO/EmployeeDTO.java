@@ -13,6 +13,6 @@ import lombok.ToString;
 public class EmployeeDTO {
     private int eid;
     private String ename;
-    private boolean isAdmin = false;
+    public boolean isAdmin;
     private int currentSprintId;
 }

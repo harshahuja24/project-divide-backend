@@ -48,12 +48,12 @@ public class TaskService {
 //                .toList();
 //    }
 //
-//    public List<TaskDTO> getTasksBySprint(int sprintId) {
-//        List<Task> taskList = taskRepository.findBySprint_SprintId(sprintId);
-//        return taskList.stream()
-//                .map((t) -> taskDTOMapper.toDTO(t))
-//                .toList();
-//    }
+    public List<TaskDTO> getTasksBySprint(int sprintId) {
+        List<Task> taskList = taskRepository.findBySprint_SprintId(sprintId);
+        return taskList.stream()
+                .map((t) -> taskDTOMapper.toDTO(t))
+                .toList();
+    }
 
     public void updateTask(TaskDTO taskDTO) {
         Task task = taskDTOMapper.toEntity(taskDTO);
