@@ -147,12 +147,12 @@ public class SprintDTOMapper {
             if (sprintDTO.getEndDate() != null) {
                 sprint.setEndDate(sprintDTO.getEndDate().atStartOfDay());
             }
-            sprint.setEmployee(existingSprint.get().getEmployee());
+            sprint.setEmployees(existingSprint.get().getEmployees());
             sprint.setTaskList(existingSprint.get().getTaskList());
             return sprint;
         } else {
             // If sprint ID is provided but doesn't exist, create new sprint
-           throw new RuntimeException("Bebu nahi mila hai usko sprint ");
+            throw new RuntimeException("Bebu nahi mila hai usko sprint ");
         }
     }
 }
