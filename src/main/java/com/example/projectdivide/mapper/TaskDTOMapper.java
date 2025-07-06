@@ -21,7 +21,7 @@ public class TaskDTOMapper {
     SprintRepository sprintRepository;
 
 
-    Task toEntity(TaskDTO taskDTO) {
+    public Task toEntity(TaskDTO taskDTO) {
 
         Task task = new Task();
 

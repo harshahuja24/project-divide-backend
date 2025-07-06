@@ -30,6 +30,11 @@ public class EmployeeService {
 
     public List<EmployeeDTO> getAllEmployees() {
 
+            List<Employee> employeeList = employeeRepository.findAll();
+            return employeeList.stream()
+                    .map((e)->employeeDTOMapper.toDTO(e))
+                    .toList();
+
     }
 
     public EmployeeDTO getEmployeeById(int id) {
