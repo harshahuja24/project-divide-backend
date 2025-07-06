@@ -67,8 +67,8 @@ public class SprintService {
             Sprint sprint = existingSprint.get();
             sprint.setSprintTitle(sprintDTO.getSprintTitle());
             sprint.setSprintDesc(sprintDTO.getSprintDesc());
-            sprint.setStartDate(sprintDTO.getStartDate());
-            sprint.setEndDate(sprintDTO.getEndDate());
+            sprint.setStartDate(sprintDTO.getStartDate().atStartOfDay());
+            sprint.setEndDate(sprintDTO.getEndDate().atStartOfDay());
             sprintRepository.save(sprint);
         } else {
             throw new RuntimeException("Sprint not found with ID: " + sprintDTO.getSprintId());

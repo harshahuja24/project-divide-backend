@@ -106,8 +106,13 @@ public class SprintDTOMapper {
         sprintDTO.setSprintId(sprint.getSprintId());
         sprintDTO.setSprintTitle(sprint.getSprintTitle());
         sprintDTO.setSprintDesc(sprint.getSprintDesc());
-        sprintDTO.setStartDate(sprint.getStartDate());
-        sprintDTO.setEndDate(sprint.getEndDate());
+        // Convert LocalDateTime to LocalDate
+        if (sprint.getStartDate() != null) {
+            sprintDTO.setStartDate(sprint.getStartDate().toLocalDate());
+        }
+        if (sprint.getEndDate() != null) {
+            sprintDTO.setEndDate(sprint.getEndDate().toLocalDate());
+        }
         return sprintDTO;
     }
 
@@ -119,8 +124,13 @@ public class SprintDTOMapper {
         if (sprintDTO.getSprintId() == 0) {
             sprint.setSprintTitle(sprintDTO.getSprintTitle());
             sprint.setSprintDesc(sprintDTO.getSprintDesc());
-            sprint.setStartDate(sprintDTO.getStartDate());
-            sprint.setEndDate(sprintDTO.getEndDate());
+            // Convert LocalDate to LocalDateTime
+            if (sprintDTO.getStartDate() != null) {
+                sprint.setStartDate(sprintDTO.getStartDate().atStartOfDay());
+            }
+            if (sprintDTO.getEndDate() != null) {
+                sprint.setEndDate(sprintDTO.getEndDate().atStartOfDay());
+            }
             return sprint;
         }
 
@@ -130,8 +140,13 @@ public class SprintDTOMapper {
             sprint.setSprintId(sprintDTO.getSprintId());
             sprint.setSprintTitle(sprintDTO.getSprintTitle());
             sprint.setSprintDesc(sprintDTO.getSprintDesc());
-            sprint.setStartDate(sprintDTO.getStartDate());
-            sprint.setEndDate(sprintDTO.getEndDate());
+            // Convert LocalDate to LocalDateTime
+            if (sprintDTO.getStartDate() != null) {
+                sprint.setStartDate(sprintDTO.getStartDate().atStartOfDay());
+            }
+            if (sprintDTO.getEndDate() != null) {
+                sprint.setEndDate(sprintDTO.getEndDate().atStartOfDay());
+            }
             sprint.setEmployee(existingSprint.get().getEmployee());
             sprint.setTaskList(existingSprint.get().getTaskList());
             return sprint;
