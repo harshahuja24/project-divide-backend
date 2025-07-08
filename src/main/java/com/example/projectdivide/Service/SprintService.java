@@ -44,21 +44,29 @@ public class SprintService {
     }
 
     // Get active sprint (current date between start and end date)
+//    public SprintDTO getActiveSprint() {
+//        LocalDateTime now = LocalDateTime.now();
+//        List<Sprint> allSprints = sprintRepository.findAll();
+//
+//        for (Sprint sprint : allSprints) {
+//            if (sprint.getStartDate() != null && sprint.getEndDate() != null) {
+//                if (now.isAfter(sprint.getStartDate()) && now.isBefore(sprint.getEndDate())) {
+//                    return sprintDTOMapper.toDTO(sprint);
+//                }
+//            }
+//        }
+//
+//        // If no active sprint found, return null
+//        return null;
+//    }
+
     public SprintDTO getActiveSprint() {
-        LocalDateTime now = LocalDateTime.now();
-        List<Sprint> allSprints = sprintRepository.findAll();
-
-        for (Sprint sprint : allSprints) {
-            if (sprint.getStartDate() != null && sprint.getEndDate() != null) {
-                if (now.isAfter(sprint.getStartDate()) && now.isBefore(sprint.getEndDate())) {
-                    return sprintDTOMapper.toDTO(sprint);
-                }
-            }
-        }
-
-        // If no active sprint found, return null
-        return null;
+        Optional<Sprint> sprint = sprintRepository.findByActiveYNTrue();
+        System.out.println(sprint.get().toString());
+        SprintDTO sprintDTO = sprintDTOMapper.toDTO(sprint.get());
+        return sprintDTO;
     }
+
 
     // Update sprint
     public void updateSprint(SprintDTO sprintDTO) {

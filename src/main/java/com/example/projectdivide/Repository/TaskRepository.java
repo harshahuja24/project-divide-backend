@@ -9,5 +9,6 @@ import java.util.List;
 public interface TaskRepository extends JpaRepository<Task,Integer> {
 
     List<Task> findBySprint_SprintId(int sprintId);
+    List<Task> findByAssignedTo(int assignedTo);
 
 }

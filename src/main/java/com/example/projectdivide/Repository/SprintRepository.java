@@ -8,4 +8,7 @@ import java.util.Optional;
 public interface SprintRepository extends JpaRepository<Sprint, Integer> {
     
     public Optional<Sprint> findBySprintId(int sprintId);
+    // In SprintRepository
+    Optional<Sprint> findByActiveYNTrue();
+
 }

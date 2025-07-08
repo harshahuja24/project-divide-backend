@@ -1,6 +1,8 @@
 package com.example.projectdivide.Controller;
 
+import com.example.projectdivide.DTO.SprintDTO;
 import com.example.projectdivide.DTO.TaskDTO;
+import com.example.projectdivide.Service.SprintService;
 import com.example.projectdivide.Service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,9 @@ public class TaskController {
 
     @Autowired
     TaskService taskService;
+
+    @Autowired
+    SprintService sprintService;
 
     // Create a new task
     @PostMapping("/create")
@@ -53,18 +58,18 @@ public class TaskController {
         }
     }
 
-//    // Get tasks by employee ID
-//    @GetMapping("/employee/{employeeId}")
-//    public ResponseEntity<List<TaskDTO>> getTasksByEmployee(@PathVariable int employeeId) {
-//        try {
-//            List<TaskDTO> tasks = taskService.getTasksByEmployee(employeeId);
-//            return ResponseEntity.ok(tasks);
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .body(null);
-//        }
-//    }
-//
+    // Get tasks by employee ID
+    @GetMapping("/employee/{employeeId}")
+    public ResponseEntity<List<TaskDTO>> getTasksByEmployee(@PathVariable int employeeId) {
+        try {
+            List<TaskDTO> tasks = taskService.getTasksByEmployee(employeeId);
+            return ResponseEntity.ok(tasks);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
     // Get tasks by sprint ID
     @GetMapping("/bySprintId/{sprintId}")
     public ResponseEntity<List<TaskDTO>> getTasksBySprint(@PathVariable int sprintId) {
@@ -137,4 +142,33 @@ public class TaskController {
 //                    .body(null);
 //        }
 //    }
+
+    @GetMapping("/active-sprint")
+    public ResponseEntity<List<TaskDTO>> getTasksOfActiveSprint() {
+        try {
+            SprintDTO activeSprint = sprintService.getActiveSprint();
+            if (activeSprint == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+            int sprintId = activeSprint.getSprintId();
+            List<TaskDTO> tasks = taskService.getTasksBySprint(sprintId);
+            return ResponseEntity.ok(tasks);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @GetMapping("/active-sprint/employee/{employeeId}")
+    public ResponseEntity<List<TaskDTO>> getActiveSprintTasksByEmployee(@PathVariable int employeeId) {
+        try {
+            List<TaskDTO> tasks = taskService.getActiveSprintTasksByEmployee(employeeId);
+            if (tasks == null || tasks.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+            return ResponseEntity.ok(tasks);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 }
+
