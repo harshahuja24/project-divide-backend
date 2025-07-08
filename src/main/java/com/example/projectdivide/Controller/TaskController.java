@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tasks")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TaskController {
 
     @Autowired
@@ -22,8 +22,7 @@ public class TaskController {
     public ResponseEntity<String> createTask(@RequestBody TaskDTO taskDTO) {
         try {
             taskService.createTask(taskDTO);
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body("Task created successfully");
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("Error creating task: " + e.getMessage());

@@ -17,10 +17,8 @@ public class Sprint {
     private String sprintTitle;
     private String sprintDesc;
 
-    @CreationTimestamp
     private LocalDateTime startDate;
 
-    @CreationTimestamp
     private LocalDateTime endDate;
 
     // FIXED: Changed from @OneToOne to @OneToMany
