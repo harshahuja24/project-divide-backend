@@ -86,6 +86,20 @@ public class SprintService {
             throw new RuntimeException("SPrint nahi mili bebu");
         }
     }
+
+    public void stopSprint(int id){
+        Optional<Sprint> existingSprint = sprintRepository.findBySprintId(id);
+        if(existingSprint.isPresent()){
+            Sprint s = existingSprint.get();
+            s.setActiveYN(false);
+            sprintRepository.save(s);
+        }
+        else{
+            throw new RuntimeException("SPrint nahi mili bebu");
+        }
+    }
+
+
     // Delete sprint
     public void deleteSprint(int id) {
         Optional<Sprint> sprint = sprintRepository.findBySprintId(id);

@@ -52,6 +52,11 @@ public class EmployeeController {
         }
     }
 
+    @PutMapping("/setSprintIdForEmployees")
+    public void setSprintIdForEmployees(@RequestBody Object body){
+        employeeService.setSprintIdForEmployees(body);
+    }
+
 
 
 
