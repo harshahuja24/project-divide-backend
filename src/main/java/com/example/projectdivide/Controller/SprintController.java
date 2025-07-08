@@ -24,6 +24,7 @@ public class SprintController {
             sprintService.createSprint(sprintDTO);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
+
             return new ResponseEntity<>("Error creating sprint: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
