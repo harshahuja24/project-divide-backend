@@ -21,6 +21,8 @@ public class Sprint {
 
     private LocalDateTime endDate;
 
+    public boolean activeYN;
+
     // FIXED: Changed from @OneToOne to @OneToMany
     // One sprint can have many employees
     @OneToMany(mappedBy = "sprint", cascade = CascadeType.ALL)

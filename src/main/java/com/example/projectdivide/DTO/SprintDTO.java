@@ -19,5 +19,6 @@ public class SprintDTO {
     private String sprintDesc;
     private LocalDate startDate;
     private LocalDate endDate;
+    public boolean activeYN;
 
 }
