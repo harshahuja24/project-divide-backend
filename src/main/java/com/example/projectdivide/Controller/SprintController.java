@@ -86,6 +86,11 @@ public class SprintController {
     public void startSprint(@PathVariable int id){
         sprintService.startSprint(id);
     }
+    @PutMapping("/stopSprint/{id}")
+    public void stopSprint(@PathVariable int id){
+        sprintService.stopSprint(id);
+    }
+
 
     // Delete sprint
     @DeleteMapping("/deleteSprint/{id}")

@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -52,6 +54,27 @@ public class EmployeeService {
 
 
 
+    }
+
+    public void setSprintIdForEmployees(Object body){
+//       sprintId
+//               employeesId []
+//
+//               update employees where emploeey.eid in emplyessId sprint_id  = sprintId;
+
+        Map<String, Object> bodyMap = (Map<String, Object>) body;
+
+        // Extract and cast sprintId
+        Long sprintId = Long.valueOf(bodyMap.get("sprintId").toString());
+
+        // Extract and cast employeeIds
+        List<Integer> employeeIdsRaw = (List<Integer>) bodyMap.get("employeeIds");
+        List<Long> employeeIds = employeeIdsRaw.stream()
+                .map(Long::valueOf)
+                .collect(Collectors.toList());
+
+        // Call repository method
+        employeeRepository.updateSprintIdForEmployees(sprintId, employeeIds);
     }
 
 
