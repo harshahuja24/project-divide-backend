@@ -106,6 +106,7 @@ public class SprintDTOMapper {
         sprintDTO.setSprintId(sprint.getSprintId());
         sprintDTO.setSprintTitle(sprint.getSprintTitle());
         sprintDTO.setSprintDesc(sprint.getSprintDesc());
+        sprintDTO.setActiveYN(sprint.isActiveYN());
         // Convert LocalDateTime to LocalDate
         if (sprint.getStartDate() != null) {
             sprintDTO.setStartDate(sprint.getStartDate().toLocalDate());
@@ -119,6 +120,8 @@ public class SprintDTOMapper {
     // Convert SprintDTO to Sprint entity
     public Sprint toEntity(SprintDTO sprintDTO) {
         Sprint sprint = new Sprint();
+
+        sprint.setActiveYN(sprintDTO.isActiveYN());
 
         // For new sprint creation (sprintId is 0 or not set)
         if (sprintDTO.getSprintId() == 0) {

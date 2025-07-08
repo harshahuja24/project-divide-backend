@@ -22,7 +22,7 @@ public class SprintController {
     public ResponseEntity<String> createSprint(@RequestBody SprintDTO sprintDTO) {
         try {
             sprintService.createSprint(sprintDTO);
-            return new ResponseEntity<>("Sprint created successfully", HttpStatus.CREATED);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Error creating sprint: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -79,6 +79,11 @@ public class SprintController {
         } catch (Exception e) {
             return new ResponseEntity<>("Error updating sprint: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PutMapping("/startSprint/{id}")
+    public void startSprint(@PathVariable int id){
+        sprintService.startSprint(id);
     }
 
     // Delete sprint
