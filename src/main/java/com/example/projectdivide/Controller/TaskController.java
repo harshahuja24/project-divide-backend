@@ -170,5 +170,12 @@ public class TaskController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+
+    @PutMapping("/updateStatus")
+    public void updateStatus(@RequestBody TaskDTO body){
+        System.out.println("Hello from update stataus");
+        System.out.println(body);
+        taskService.updateStatus(body.getTaskId(), body.getTaskStatus());
+    }
 }
 

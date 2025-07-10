@@ -84,4 +84,19 @@ public class TaskService {
                 .filter(task -> task.getAssignedTo() == employeeId)
                 .collect(Collectors.toList());
     }
+
+    public void updateStatus(int id, String status){
+      Optional<Task> task = taskRepository.findByTaskId(id);
+
+      if(task.isPresent()){
+          Task t = task.get();
+          System.out.println("LOL "+t);
+          t.setTaskStatus(status);
+          System.out.println(t);
+          taskRepository.save(t);
+      }else{
+          throw new RuntimeException(" BEbu task nahi mila hai ");
+      }
+    }
+
 }
