@@ -30,9 +30,6 @@ public class EmployeeService  {
     EmployeeRepository employeeRepository;
 
 
-
-
-
     public void createEmployee(EmployeeDTO employeeDTO) {
 
             Employee employee = employeeDTOMapper.toEntity(employeeDTO);
@@ -48,6 +45,9 @@ public class EmployeeService  {
     public List<EmployeeDTO> getAllEmployees() {
 
             List<Employee> employeeList = employeeRepository.findAll();
+            for(Employee emp:employeeList){
+                System.out.println("emp"+emp);
+            }
             return employeeList.stream()
                     .map((e)->employeeDTOMapper.toDTO(e))
                     .toList();
@@ -66,8 +66,6 @@ public class EmployeeService  {
         }
 
         throw new RuntimeException("Run time error in Employee service ");
-
-
 
     }
 
@@ -109,6 +107,8 @@ public class EmployeeService  {
         System.out.println("Mail Sent ");
         return "";
     }
+
+
 
 
 }
