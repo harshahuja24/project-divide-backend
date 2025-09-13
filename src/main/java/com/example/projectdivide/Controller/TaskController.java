@@ -171,11 +171,12 @@ public class TaskController {
         }
     }
 
+
     @PutMapping("/updateStatus")
     public void updateStatus(@RequestBody TaskDTO body){
         System.out.println("Hello from update stataus");
         System.out.println(body);
-        taskService.updateStatus(body.getTaskId(), body.getTaskStatus());
+        sprintService.updateStatus(body.getTaskId(), body.getTaskStatus());
     }
 }
 

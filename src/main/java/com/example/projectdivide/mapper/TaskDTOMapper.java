@@ -40,6 +40,8 @@ public class TaskDTOMapper {
             task.setAssignedFrom(task.getAssignedFrom());
             task.setSprint(sprint.get());
             task.setCreatedAt(taskDTO.getCreatedAt());
+            task.setStartedAt(taskDTO.getStartedAt());
+            task.setCompletedAt(taskDTO.getCompletedAt());
 
             return task;
         } else {
@@ -60,6 +62,8 @@ public class TaskDTOMapper {
         taskDTO.setAssignedTo(task.getAssignedTo());
         taskDTO.setAssignedFrom(task.getAssignedFrom());
         taskDTO.setCreatedAt(task.getCreatedAt());
+        taskDTO.setStartedAt(task.getStartedAt());
+        taskDTO.setCompletedAt(task.getCompletedAt());
 
         // Set sprintId from the Sprint entity
         if (task.getSprint() != null) {

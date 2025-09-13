@@ -24,6 +24,9 @@ public class Task {
     @CreationTimestamp
     private LocalDateTime createdAt;
     private boolean activeYN;
+    private LocalDateTime startedAt;
+
+    private LocalDateTime completedAt;
 
     @ManyToOne
     @JoinColumn(name = "sprint_id")

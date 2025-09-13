@@ -2,13 +2,16 @@ package com.example.projectdivide.Service;
 
 import com.example.projectdivide.DTO.SprintDTO;
 import com.example.projectdivide.Entity.Sprint;
+import com.example.projectdivide.Entity.Task;
 import com.example.projectdivide.Repository.SprintRepository;
+import com.example.projectdivide.Repository.TaskRepository;
 import com.example.projectdivide.mapper.SprintDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -19,6 +22,10 @@ public class SprintService {
 
     @Autowired
     private SprintRepository sprintRepository;
+
+    @Autowired
+    private TaskRepository taskRepository;
+
 
     // Create new sprint
     public void createSprint(SprintDTO sprintDTO) {
@@ -61,10 +68,19 @@ public class SprintService {
 //    }
 
     public SprintDTO getActiveSprint() {
-        Optional<Sprint> sprint = sprintRepository.findByActiveYNTrue();
-        System.out.println(sprint.get().toString());
-        SprintDTO sprintDTO = sprintDTOMapper.toDTO(sprint.get());
-        return sprintDTO;
+//        Optional<Sprint> sprint = sprintRepository.findByActiveYNTrue();
+//        System.out.println(sprint.get().toString());
+//        SprintDTO sprintDTO = sprintDTOMapper.toDTO(sprint.get());
+//        return sprintDTO;
+
+        List<SprintDTO> sprints = getAllSprints();
+        for(SprintDTO sprint: sprints){
+            if(sprint.isActiveYN()){
+                return sprint;
+            }
+        }
+
+        return null;
     }
 
 
@@ -87,6 +103,11 @@ public class SprintService {
         Optional<Sprint> existingSprint = sprintRepository.findBySprintId(id);
         if(existingSprint.isPresent()){
             Sprint s = existingSprint.get();
+            List<Task> tasks = taskRepository.findBySprint_SprintId(s.getSprintId());
+            for(Task task : tasks){
+                updateStatus(task.getTaskId(), "TODO");
+
+            }
             s.setActiveYN(true);
             sprintRepository.save(s);
         }
@@ -115,6 +136,24 @@ public class SprintService {
             sprintRepository.delete(sprint.get());
         } else {
             throw new RuntimeException("Sprint not found with ID: " + id);
+        }
+    }
+
+    public void updateStatus(int id, String status){
+        Optional<Task> task = taskRepository.findByTaskId(id);
+
+        if(task.isPresent()){
+
+            Task t = task.get();
+            System.out.println("LOL "+t);
+            t.setTaskStatus(status);
+            System.out.println(t);
+
+            if(Objects.equals(status, "TODO"))   t.setStartedAt(LocalDateTime.now());
+            if(Objects.equals(status, "DONE")) t.setCompletedAt(LocalDateTime.now());
+            taskRepository.save(t);
+        }else{
+            throw new RuntimeException(" BEbu task nahi mila hai ");
         }
     }
 }

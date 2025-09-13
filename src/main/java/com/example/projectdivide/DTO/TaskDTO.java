@@ -21,6 +21,8 @@ public class TaskDTO {
     private String taskDesc;
     private String taskStatus;
     private LocalDateTime createdAt;
+    private LocalDateTime startedAt;
     private boolean activeYN;
+    private LocalDateTime completedAt;
 //    private int sprintId;
 }
