@@ -14,6 +14,8 @@ public class Employee {
 
     private String ename;
     private boolean isAdmin;
+    private String password;
+    private String email;
 
     // FIXED: Changed from @OneToOne to @ManyToOne
     // Many employees can belong to one sprint

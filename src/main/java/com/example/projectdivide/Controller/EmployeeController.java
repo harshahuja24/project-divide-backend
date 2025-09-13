@@ -1,7 +1,6 @@
 package com.example.projectdivide.Controller;
 
 import com.example.projectdivide.DTO.EmployeeDTO;
-import com.example.projectdivide.Entity.Employee;
 import com.example.projectdivide.Service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +14,8 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 public class EmployeeController {
 
+
+
     @Autowired
     private EmployeeService employeeService;
 
@@ -22,6 +23,7 @@ public class EmployeeController {
     @PostMapping("/createEmployee")
     public void createEmployee(@RequestBody EmployeeDTO employeeDTO) {
 
+        System.out.println("From Controller "+employeeDTO.getEmail());
             employeeService.createEmployee(employeeDTO);
 
     }
@@ -57,8 +59,6 @@ public class EmployeeController {
     public void setSprintIdForEmployees(@RequestBody Object body){
         employeeService.setSprintIdForEmployees(body);
     }
-
-
 
 
 }

@@ -15,4 +15,6 @@ public class EmployeeDTO {
     private String ename;
     public boolean isAdmin;
     private int currentSprintId;
+     String email;
+     String password;
 }

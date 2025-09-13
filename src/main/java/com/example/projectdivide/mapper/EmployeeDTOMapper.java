@@ -19,6 +19,8 @@ public class EmployeeDTOMapper {
         employeeDTO.setEid(employee.getEid());
         employeeDTO.setEname(employee.getEname());
         employeeDTO.setAdmin(employee.isAdmin());
+        employeeDTO.setEmail(employee.getEmail());
+
 
         // FIXED: Set currentSprintId from the sprint relationship
         if (employee.getSprint() != null) {
@@ -40,6 +42,8 @@ public class EmployeeDTOMapper {
 
         employee.setEname(employeeDTO.getEname());
         employee.setAdmin(employeeDTO.isAdmin());
+        employee.setEmail(employeeDTO.getEmail());
+
 
         // FIXED: Handle sprint assignment properly
         if (employeeDTO.getCurrentSprintId() != 0) {
